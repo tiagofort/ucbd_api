@@ -3,11 +3,11 @@ const userRepository = require('../repositories/user.repository');
 
 const createUser = async ({ email, password, active }) => {
   const hashedPassword = await bcrypt.hash(password, 10);
-  return userRepository.createUser({ email, password: hashedPassword, active });
+  return userRepository.create({ email, password: hashedPassword, active });
 };
 
-const getAllUsers = () => userRepository.getAllUsers();
-const getUserById = (id) => userRepository.getUserById(id);
+const getAllUsers = () => userRepository.findAll();
+const getUserById = (id) => userRepository.findById(id);
 const updateUser = async (id, data) => {
   if (data.password) {
     data.password = await bcrypt.hash(data.password, 10);
