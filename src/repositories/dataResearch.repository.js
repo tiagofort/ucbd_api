@@ -5,11 +5,11 @@ const create = async (data) => {
 };
 
 const findAll = async () => {
-  return await DataResearch.find();
+  return await DataResearch.find().populate('sociodemographic_id');
 };
 
 const findById = async (id) => {
-  return await DataResearch.findById(id);
+  return await DataResearch.findById(id).populate('sociodemographic_id');
 };
 
 module.exports = {

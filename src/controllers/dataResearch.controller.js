@@ -1,9 +1,19 @@
 const dataResearchService = require('../services/dataResearch.service');
+const socioDemographicService = require('../services/socioDemographic.service');
 
 const create = async (req, res) => {
+  const { socio, research } = req.body;
   try {
-    const result = await dataResearchService.createDataResearch(req.body);
-    res.status(201).json(result);
+    const socioDemo = await socioDemographicService.createSociodemographic(socio)
+    const dataResearch = await dataResearchService.createDataResearch({
+      ...research,
+      sociodemographic_id: socioDemo._id
+    });
+     res.status(201).json({
+      message: 'Dados salvos com sucesso!',
+      research: dataResearch,
+      socio: socioDemo
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao salvar as respostas da pesquisa' });

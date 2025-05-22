@@ -23,6 +23,10 @@ const DataResearch = new mongoose.Schema({
   answer_20: String,
   answer_21: String,
   email: String,
+  sociodemographic_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Sociodemographic'
+  }
 }, { timestamps: true });
 
 module.exports = mongoose.model('DataResearch', DataResearch);
