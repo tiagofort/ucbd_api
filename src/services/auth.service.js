@@ -6,12 +6,12 @@ const login = async (email, password) => {
   const user = await userRepository.getUserByEmail(email);
 
   if (!user) {
-    throw new Error('Usuário não encontrado');
+    throw new Error('User not found');
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);
   if (!isPasswordValid) {
-    throw new Error('Senha inválida');
+    throw new Error('Wrong Password');
   }
 
   const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, {

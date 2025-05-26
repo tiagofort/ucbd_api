@@ -3,8 +3,6 @@ const socioDemographicService = require('../services/socioDemographic.service');
 
 const create = async (req, res) => {
   const { socio, research } = req.body;
-  console.log(socio)
-  console.log(research)
   try {
     const socioDemo = await socioDemographicService.createSociodemographic(socio)
     const dataResearch = await dataResearchService.createDataResearch({
