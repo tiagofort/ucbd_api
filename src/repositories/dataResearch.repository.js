@@ -5,7 +5,15 @@ const create = async (data) => {
 };
 
 const findAll = async () => {
-  return await DataResearch.find().populate('sociodemographic_id');
+  const data = await DataResearch.find().populate('sociodemographic_id').lean();
+
+  const flattened = data.map(item => ({
+    ...item,
+    ...item.sociodemographic_id, // copia os campos da referência para o objeto principal
+    sociodemographic_id: item.sociodemographic_id?._id, // opcional: mantém só o ID se quiser
+  }));
+  
+  return flattened;
 };
 
 const findById = async (id) => {
