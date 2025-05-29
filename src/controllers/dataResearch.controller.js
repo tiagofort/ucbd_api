@@ -1,5 +1,6 @@
 const dataResearchService = require('../services/dataResearch.service');
 const socioDemographicService = require('../services/socioDemographic.service');
+const Dictionary = require('../docs/dictionary.doc');
 
 const create = async (req, res) => {
   const { socio, research } = req.body;
@@ -23,7 +24,8 @@ const create = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const results = await dataResearchService.getAllDataResearch();
-    res.status(200).json(results);
+    const translate = Dictionary.translateAcronyms(results);
+    res.status(200).json(translate);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Erro ao buscar os dados da pesquisa' });

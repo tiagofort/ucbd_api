@@ -12,8 +12,10 @@ const getDataResearchById = async (id) => {
   return await dataResearchRepository.findById(id);
 };
 
+
+
 module.exports = {
   createDataResearch,
   getAllDataResearch,
-  getDataResearchById
+  getDataResearchById,
 };

@@ -9,11 +9,12 @@ const findAll = async () => {
 
   const flattened = data.map(item => ({
     ...item,
-    ...item.sociodemographic_id, // copia os campos da referência para o objeto principal
-    sociodemographic_id: item.sociodemographic_id?._id, // opcional: mantém só o ID se quiser
+    ...item.sociodemographic_id,
+    sociodemographic_id: item.sociodemographic_id?._id,
   }));
   
   return flattened;
+  // return flattened;
 };
 
 const findById = async (id) => {
