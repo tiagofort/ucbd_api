@@ -6,7 +6,7 @@ const authMiddleware = require('../middlewares/auth.middleware');
 
 router.post('/', dataResearchController.create);
 router.get('/', authMiddleware, dataResearchController.getAll);
-router.get('/export', exportExel.exportExcel);
+router.get('/export', authMiddleware, exportExel.exportExcel);
 router.get('/:id', dataResearchController.getById);
 
 
