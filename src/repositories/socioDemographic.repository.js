@@ -12,8 +12,13 @@ const findById = async (id) => {
   return await Sociodemographic.findById(id);
 };
 
+const deleteById = async (id) => {
+    return Sociodemographic.findByIdAndDelete(id);
+}
+ 
 module.exports = {
   create,
   findAll,
-  findById
+  findById,
+  deleteById
 };

@@ -3,26 +3,37 @@ const ExcelJS = require('exceljs');
 const Dictionary = require('../docs/dictionary.doc');
 
 
-const generateExcelBuffer = async () => {
-    const rawData = await findAll();
+async function generateExcelBuffer() {
+  const rawData = await findAll();
 
-    const translatedData = Dictionary.translateAcronyms(rawData);
+  if (!rawData || rawData.length === 0) {
+    throw new Error('Nenhum dado encontrado para exportar.');
+  }
 
-    const workbook = new ExcelJS.Workbook();
-    const worksheet = workbook.addWorksheet('Survey Data');
+  const translatedData = Dictionary.translateAcronyms(rawData);
 
-    worksheet.columns = Object.keys(translatedData[0]).map(key => ({
-        header: key,
-        key,
-        width: 25
-    }));
+  if (!translatedData || translatedData.length === 0) {
+    throw new Error('Erro ao traduzir os dados.');
+  }
 
-    translatedData.forEach(row => {
-        worksheet.addRow(row);
-    });
+  const workbook = new ExcelJS.Workbook();
+  const worksheet = workbook.addWorksheet('Survey Data');
 
-    return await workbook.xlsx.writeBuffer();
-};
+  if (!translatedData[0] || Object.keys(translatedData[0]).length === 0) {
+    throw new Error('Dados inválidos para exportação.');
+  }
+
+  worksheet.columns = Object.keys(translatedData[0]).map(key => ({
+    header: key,
+    key,
+    width: 25
+  }));
+  
+
+  translatedData.forEach(row => worksheet.addRow(row));
+
+  return await workbook.xlsx.writeBuffer();
+}
 
 
 module.exports = {
