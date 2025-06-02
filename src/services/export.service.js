@@ -16,21 +16,24 @@ async function generateExcelBuffer() {
     throw new Error('Erro ao traduzir os dados.');
   }
 
+   const cleanedData = translatedData.map(
+    ({ dataResearch_id, _id, sociodemographic_id, __v, createdAt, updatedAt, ...rest }) => rest
+  );
+
   const workbook = new ExcelJS.Workbook();
   const worksheet = workbook.addWorksheet('Survey Data');
 
-  if (!translatedData[0] || Object.keys(translatedData[0]).length === 0) {
+  if (!cleanedData[0] || Object.keys(cleanedData[0]).length === 0) {
     throw new Error('Dados inválidos para exportação.');
   }
 
-  worksheet.columns = Object.keys(translatedData[0]).map(key => ({
+  worksheet.columns = Object.keys(cleanedData[0]).map(key => ({
     header: key,
     key,
     width: 25
   }));
-  
 
-  translatedData.forEach(row => worksheet.addRow(row));
+  cleanedData.forEach(row => worksheet.addRow(row));
 
   return await workbook.xlsx.writeBuffer();
 }

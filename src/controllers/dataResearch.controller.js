@@ -47,18 +47,28 @@ const getById = async (req, res) => {
 
 const deleteResearch = async (req, res) => {
     const { id } = req.params;
-
     try {
       const result = await dataResearchService.deleteWithSocioDemographic(id);
       res.status(200).json(result);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
+}
+
+const countAnswers = async (req, res) => {
+  try {
+    const result = await dataResearchService.countAnswers();
+    res.status(200).json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Erro ao buscar os dados da pesquisa' });
   }
+}
 
 module.exports = {
   create,
   getAll,
   getById,
-  deleteResearch
+  deleteResearch,
+  countAnswers
 };

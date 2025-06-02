@@ -30,11 +30,16 @@ const deleteWithSocioDemographic = async (dataResearchId) => {
     return { message: 'DataResearch and associated SocioDemographic deleted successfully' };
 }
 
+const countAnswers = async () => {
+  return await dataResearchRepository.countAnswers();
+}
+
 
 
 module.exports = {
   createDataResearch,
   getAllDataResearch,
   getDataResearchById,
-  deleteWithSocioDemographic
+  deleteWithSocioDemographic,
+  countAnswers
 };

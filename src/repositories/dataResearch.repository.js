@@ -25,9 +25,14 @@ const deleteById = async (id) => {
   return DataResearch.findByIdAndDelete(id);
 }
 
+const countAnswers = async () => {
+  return DataResearch.countDocuments();
+}
+
 module.exports = {
   create,
   findAll,
   findById,
-  deleteById
+  deleteById,
+  countAnswers
 };
