@@ -33,8 +33,29 @@ const getSocioDemographicById = async (req, res) => {
   }
 };
 
+const getStates = async (req, res) => {
+  try {
+    const data = await sociodemographicService.listTotalByState();
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch data by state' });
+  }
+}
+
+const getCities = async (req, res) => {
+  try {
+    const state = req.params.state;
+    const data = await sociodemographicService.listTotalByCity(state);
+    res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch data by city' });
+  }
+}
+
 module.exports = {
   createSociodemographic,
   getAllSociodemographics,
-  getSocioDemographicById
+  getSocioDemographicById,
+  getStates,
+  getCities
 };

@@ -29,10 +29,11 @@ const countAnswers = async () => {
   return DataResearch.countDocuments();
 }
 
+
 module.exports = {
   create,
   findAll,
   findById,
   deleteById,
-  countAnswers
+  countAnswers,
 };

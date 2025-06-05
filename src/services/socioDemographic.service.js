@@ -12,8 +12,18 @@ const getSociodemographicById = async (id) => {
   return await sociodemographicRepository.findById(id);
 };
 
+const listTotalByState = async () => {
+  return sociodemographicRepository.getTotalByState();
+}
+
+const listTotalByCity = async (state) => {
+  return sociodemographicRepository.getTotalByCity(state);
+}
+
 module.exports = {
   createSociodemographic,
   getAllSociodemographics,
-  getSociodemographicById
+  getSociodemographicById,
+  listTotalByState,
+  listTotalByCity
 };
