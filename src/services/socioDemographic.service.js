@@ -1,4 +1,5 @@
 const sociodemographicRepository = require('../repositories/socioDemographic.repository');
+const Dictionary = require('../docs/dictionary.doc');
 
 const createSociodemographic = async (data) => {
   return await sociodemographicRepository.create(data);
@@ -13,7 +14,8 @@ const getSociodemographicById = async (id) => {
 };
 
 const listTotalByState = async () => {
-  return sociodemographicRepository.getTotalByState();
+  const translatedData = sociodemographicRepository.getTotalByState();
+  return Dictionary.acronymDictionary(translatedData);
 }
 
 const listTotalByCity = async (state) => {
