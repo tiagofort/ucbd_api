@@ -56,7 +56,6 @@ The ability to export results in Excel format was a specific requirement. **Exce
 ├── config/ # Environment and database configs
 ├── controllers/ # Request handlers
 ├── docs/ # API documentation (e.g., Swagger)
-├── http/ # HTTP-specific helpers or constants
 ├── middlewares/ # Auth, error handling, CORS etc.
 ├── models/ # Mongoose schemas
 ├── repositories/ # Data access and abstraction layer
@@ -65,13 +64,63 @@ The ability to export results in Excel format was a specific requirement. **Exce
 ├── app.js # Main Express app setup
 ```
 
-## 📤 API Endpoints (Sample)
+## 📤 API Endpoints
 
-- `POST /form/basic` — Submit basic form response  
-- `POST /form/interactive` — Submit interactive response  
-- `GET /admin/data` — View all participant data *(protected)*  
-- `GET /admin/export` — Export responses as `.xlsx` file *(protected)*  
+Below is a summary of the available routes in the system:
 
+---
+
+### 🔐 Authentication
+
+| Method | Endpoint     | Description                  |
+|--------|--------------|------------------------------|
+| POST   | `/login`     | Authenticate a researcher and return a JWT token |
+
+---
+
+### 📊 Data Research
+
+| Method | Endpoint           | Description                              | Auth Required |
+|--------|--------------------|------------------------------------------|---------------|
+| POST   | `/`                | Submit research data                     | ❌            |
+| GET    | `/`                | Get all research entries                 | ✅            |
+| GET    | `/export`          | Export research data as Excel            | ✅            |
+| GET    | `/countAnswers`    | Count all answers submitted              | ❌            |
+| GET    | `/:id`             | Get a specific research entry by ID      | ❌            |
+| DELETE | `/:id`             | Delete a research entry by ID            | ❌            |
+
+> Base path: `/data-research`
+
+---
+
+### 🧍 Socio-Demographic
+
+| Method | Endpoint                           | Description                          |
+|--------|------------------------------------|--------------------------------------|
+| POST   | `/`                                | Submit socio-demographic data        |
+| GET    | `/states`                          | Get all available states             |
+| GET    | `/states/:state/cities`            | Get cities by state                  |
+
+> Base path: `/sociodemographic`
+
+---
+
+### 👥 Users (Admin Only)
+
+| Method | Endpoint       | Description                   |
+|--------|----------------|-------------------------------|
+| POST   | `/`            | Create a new user (researcher)|
+| GET    | `/`            | Get all users                 |
+| GET    | `/:id`         | Get a user by ID              |
+| PUT    | `/:id`         | Update a user by ID           |
+| DELETE | `/:id`         | Delete a user by ID           |
+
+> Base path: `/user`
+
+---
+
+✅ = Requires JWT authentication  
+❌ = Public route
 
 
 ## 🧪 Getting Started
