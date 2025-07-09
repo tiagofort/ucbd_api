@@ -76,6 +76,8 @@ Below is a summary of the available routes in the system:
 |--------|--------------|------------------------------|
 | POST   | `/login`     | Authenticate a researcher and return a JWT token |
 
+> Base path: `/auth`
+
 ---
 
 ### 📊 Data Research
@@ -85,37 +87,37 @@ Below is a summary of the available routes in the system:
 | POST   | `/`                | Submit research data                     | ❌            |
 | GET    | `/`                | Get all research entries                 | ✅            |
 | GET    | `/export`          | Export research data as Excel            | ✅            |
-| GET    | `/countAnswers`    | Count all answers submitted              | ❌            |
-| GET    | `/:id`             | Get a specific research entry by ID      | ❌            |
-| DELETE | `/:id`             | Delete a research entry by ID            | ❌            |
+| GET    | `/countAnswers`    | Count all answers submitted              | ✅            |
+| GET    | `/:id`             | Get a specific research entry by ID      | ✅            |
+| DELETE | `/:id`             | Delete a research entry by ID            | ✅            |
 
-> Base path: `/data-research`
+> Base path: `/dataResearch`
 
 ---
 
 ### 🧍 Socio-Demographic
 
-| Method | Endpoint                           | Description                          |
-|--------|------------------------------------|--------------------------------------|
-| POST   | `/`                                | Submit socio-demographic data        |
-| GET    | `/states`                          | Get all available states             |
-| GET    | `/states/:state/cities`            | Get cities by state                  |
+| Method | Endpoint                           | Description                          | Auth Required |
+|--------|------------------------------------|--------------------------------------|---------------|
+| POST   | `/`                                | Submit socio-demographic data        | ❌            |
+| GET    | `/states`                          | Get all available states             | ✅            |
+| GET    | `/states/:state/cities`            | Get cities by state                  | ✅            |
 
-> Base path: `/sociodemographic`
+> Base path: `/socioDemographic`
 
 ---
 
 ### 👥 Users (Admin Only)
 
-| Method | Endpoint       | Description                   |
-|--------|----------------|-------------------------------|
-| POST   | `/`            | Create a new user (researcher)|
-| GET    | `/`            | Get all users                 |
-| GET    | `/:id`         | Get a user by ID              |
-| PUT    | `/:id`         | Update a user by ID           |
-| DELETE | `/:id`         | Delete a user by ID           |
+| Method | Endpoint       | Description                   | Auth Required |
+|--------|----------------|-------------------------------|---------------|
+| POST   | `/`            | Create a new user (researcher)| ✅            |
+| GET    | `/`            | Get all users                 | ✅            |
+| GET    | `/:id`         | Get a user by ID              | ✅            |
+| PUT    | `/:id`         | Update a user by ID           | ✅            |
+| DELETE | `/:id`         | Delete a user by ID           | ✅            |
 
-> Base path: `/user`
+> Base path: `/users`
 
 ---
 
@@ -130,8 +132,8 @@ Below is a summary of the available routes in the system:
 npm install
 
 # Set up environment variables
-JWT_SECRET
 
+JWT_SECRET
 MONGODB_URI
 
 # Start the server

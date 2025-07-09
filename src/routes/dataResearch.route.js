@@ -7,8 +7,8 @@ const authMiddleware = require('../middlewares/auth.middleware')
 router.post('/', dataResearchController.create)
 router.get('/', authMiddleware, dataResearchController.getAll)
 router.get('/export', authMiddleware, exportExel.exportExcel)
-router.get('/countAnswers', dataResearchController.countAnswers)
-router.get('/:id', dataResearchController.getById)
-router.delete('/:id', dataResearchController.deleteResearch)
+router.get('/countAnswers', authMiddleware, dataResearchController.countAnswers)
+router.get('/:id', authMiddleware, dataResearchController.getById)
+router.delete('/:id', authMiddleware, dataResearchController.deleteResearch)
 
 module.exports = router
