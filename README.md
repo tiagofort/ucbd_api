@@ -132,7 +132,7 @@ Below is a summary of the available routes in the system:
 npm install
 
 # Set up environment variables
-
+# To make a test you will need a secret word to your JWT_SECRET and a MONGODB_URI from a existing database. That's all environment variables. 
 JWT_SECRET
 MONGODB_URI
 
