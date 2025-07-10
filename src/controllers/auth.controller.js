@@ -8,7 +8,7 @@ const loginController = async (req, res) => {
   }
 
   try {
-    const result = await login(email, password);
+    const result = await login(email, password); 
     res.json(result);
   } catch (err) {
     res.status(401).json({ error: err.message });

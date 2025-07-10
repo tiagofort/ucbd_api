@@ -7,13 +7,16 @@ const createUser = async ({ email, password, active }) => {
 };
 
 const getAllUsers = () => userRepository.findAll();
+
 const getUserById = (id) => userRepository.findById(id);
+
 const updateUser = async (id, data) => {
   if (data.password) {
     data.password = await bcrypt.hash(data.password, 10);
   }
   return userRepository.updateUser(id, data);
 };
+
 const deleteUser = (id) => userRepository.deleteUser(id);
 
 module.exports = {
