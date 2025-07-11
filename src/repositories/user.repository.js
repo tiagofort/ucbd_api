@@ -8,6 +8,13 @@ const findAll = async () => {
   return await User.find();
 };
 
+const findByIdAndUpdate = (id, data) => {
+  return User.findByIdAndUpdate(id, data, {
+    new: true,
+    runValidators: true,
+  });
+};
+
 const findById = async (id) => {
   return await User.findById(id);
 };
@@ -20,5 +27,6 @@ module.exports = {
   create,
   findAll,
   findById,
-  getUserByEmail
+  getUserByEmail,
+  findByIdAndUpdate
 }

@@ -4,9 +4,13 @@ const userRepository = require('../repositories/user.repository');
 
 const login = async (email, password) => {
   const user = await userRepository.getUserByEmail(email);
-
+  
   if (!user) {
     throw new Error('User not found');
+  }
+
+  if (user.active == "false"){
+    throw new Error('User is no longer actived');
   }
 
   const isPasswordValid = await bcrypt.compare(password, user.password);

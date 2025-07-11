@@ -11,10 +11,17 @@ const getAllUsers = () => userRepository.findAll();
 const getUserById = (id) => userRepository.findById(id);
 
 const updateUser = async (id, data) => {
-  if (data.password) {
-    data.password = await bcrypt.hash(data.password, 10);
+  const updateData = { ...data };
+
+  if (updateData.password) {
+    const salt = await bcrypt.genSalt(10);
+    updateData.password = await bcrypt.hash(updateData.password, salt);
+  } else {
+    delete updateData.password;
   }
-  return userRepository.updateUser(id, data);
+
+  const updatedUser = await userRepository.findByIdAndUpdate(id, updateData);
+  return updatedUser;
 };
 
 const deleteUser = (id) => userRepository.deleteUser(id);
