@@ -128,6 +128,9 @@ Below is a summary of the available routes in the system:
 ## 🧪 Getting Started
 
 ```bash
+# Cloning project
+git clone https://github.com/tiagofort/ucbd_api.git
+
 # Install dependencies
 npm install
 
@@ -137,4 +140,4 @@ JWT_SECRET
 MONGODB_URI
 
 # Start the server
-npm 
+npm start
