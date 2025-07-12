@@ -7,4 +7,11 @@ const UserSchema = new mongoose.Schema({
   master: { type: Boolean, default: false }
 }, { timestamps: true })
 
+const forceMasterFalse = function (next) {
+  this.set({ master: false })
+  next()
+}
+
+UserSchema.pre('findOneAndUpdate', forceMasterFalse)
+
 module.exports = mongoose.model('User', UserSchema)

@@ -5,7 +5,7 @@ const create = async (data) => {
 };
 
 const findAll = async () => {
-  return await User.find();
+  return await User.find({ master: false});
 };
 
 const findByIdAndUpdate = (id, data) => {

@@ -11,7 +11,7 @@ const loginController = async (req, res) => {
     const result = await login(email, password); 
     res.json(result);
   } catch (err) {
-    res.status(401).json({ error: err.message });
+    throw new Error(err.message);
   }
 };
 

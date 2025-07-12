@@ -8,8 +8,8 @@ const login = async (email, password) => {
   if (!user) {
     throw new Error('User not found');
   }
-
-  if (user.active == "false"){
+  
+  if (user.active == false){
     throw new Error('User is no longer actived');
   }
 
